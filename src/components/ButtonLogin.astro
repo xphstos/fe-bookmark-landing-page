@@ -1,0 +1,40 @@
+---
+---
+
+<a href="#">
+<slot />
+</a>
+
+<style>
+    a {
+        background: hsl(var(--white) / 0);
+        color: hsl(var(--white));
+        border: .15em solid hsl(var(--white));
+        padding: .75em 1.25em;
+        border-radius: .35em;
+        font-weight: 500;
+        font-size: .75rem;
+        transition: var(--tr);
+        margin-block-start: 1.5rem;
+
+        &:is(:hover,:focus-visible) {
+            background: hsl(var(--white));
+            color: hsl(var(--very-dark-blue));
+        }
+
+        @media (width >= 768px) {
+            padding: .75em 1.25em;
+            font-size: 1em;
+            margin-block-start: 0;
+            background: hsl(var(--soft-red));
+            color: hsl(var(--white));
+            border: .15em solid hsl(var(--soft-red));
+            box-shadow: 0 .25em .5em -.25em hsl(var(--very-dark-blue));
+
+            &:is(:hover,:focus-visible) {
+                background: hsl(var(--white));
+                color: hsl(var(--soft-red));
+            }
+        }
+    }
+</style>

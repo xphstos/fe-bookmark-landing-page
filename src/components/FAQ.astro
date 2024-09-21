@@ -1,0 +1,124 @@
+---
+import ButtonPrimary from "@components/ButtonPrimary.astro";
+import Section from "@components/Section.astro";
+
+
+---
+
+<!-- <section aria-labelledby="faq-title"> -->
+<Section container='34rem' title="Frequently Asked Questions" description="Here are some of our FAQs. If you have any other questions you’d like answered please feel free to email us.">
+    <section>
+        <details name="faq">
+            <summary>
+            <h3>What is Bookmark?</h3>
+            </summary>
+            <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum quis quam ornare mattis.
+            </div>
+        </details>
+        <details name="faq">
+            <summary>
+            <h3>How can I request a new browser?</h3>
+            </summary>
+            <div>
+            Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula.
+            Suspendisse imperdiet. Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa,
+            ultricies non ligula. Suspendisse imperdie tVivamus luctus eros aliquet convallis ultricies.
+            Mauris augue massa, ultricies non ligula. Suspendisse imperdiet.
+            </div>
+        </details>
+        <details name="faq">
+            <summary>
+            <h3>Is there a mobile app?</h3>
+            </summary>
+            <div>
+            Sed consectetur quam id neque fermentum accumsan. Praesent luctus vestibulum dolor, ut condimentum
+            urna vulputate eget. Cras in ligula quis est pharetra mattis sit amet pharetra purus. Sed
+            sollicitudin ex et ultricies bibendum.
+            </div>
+        </details>
+        <details name="faq">
+            <summary>
+            <h3>What about other Chromium browsers?</h3>
+            </summary>
+            <div>
+            Integer condimentum ipsum id imperdiet finibus. Vivamus in placerat mi, at euismod dui. Aliquam
+            vitae neque eget nisl gravida pellentesque non ut velit.
+            </div>
+        </details>
+    </section>
+    <footer>
+    <ButtonPrimary>
+        More info
+    </ButtonPrimary>
+    </footer>
+</Section>
+<!-- </section> -->
+
+<style>
+    section {
+        margin-block: 3em;
+    }
+
+    footer {
+        text-align: center;
+    }
+
+    details {
+        border-block: .015em solid hsl(var(--grayish-blue));
+
+        + details {
+             border-block-start: none;
+        }
+    }
+
+    details > div {
+        padding-block: 1.25em;
+        block-size: 0;
+        transition: var(--tr-height);
+        color: hsl(var(--grayish-blue));
+        line-height: 2.25;
+    }
+
+    details[open] > div {
+        block-size: auto;
+        block-size: calc-size(auto)
+    }
+
+    details[open] summary::after {
+        transform: scaleY(-1);
+         background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='none' stroke='%23fa5757' stroke-width='3' d='M1 1l8 8 8-8'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    summary {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: space-between;
+        list-style-type: none;
+        cursor: pointer;
+        padding-block: 1.25em;
+
+        &:is(:hover,:focus-visible) {
+            color: hsl(var(--soft-red));
+        }
+
+
+        &::after {
+            content: '';
+            inline-size: 18px;
+            block-size: 12px;
+            flex: 0 0 18px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='none' stroke='%235267DF' stroke-width='3' d='M1 1l8 8 8-8'/%3E%3C/svg%3E") no-repeat center;
+        }
+    }
+
+    summary h3 {
+        font-weight: 400;
+        transition: var(--tr);
+
+        @width (width > 768px) {
+            font-size: 1.25rem;
+        }
+    }
+</style>

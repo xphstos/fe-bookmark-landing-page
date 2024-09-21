@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import LogoBookmark from "@assets/logo-bookmark-white.svg"
+import {links, socialLinks} from "@data/index"
+---
+
+
+<footer >
+<nav>
+    <a href="/">
+        <Image  src={LogoBookmark} alt="Bookmark logo, link to homepage" />
+    </a>
+    <ul role="list">
+       {links.map(link => <li>
+        <a href={link.href}>{link.label}</a>
+       </li>)}
+    </ul>
+    <ul role="list">
+        {socialLinks.map(link => <li>
+            <a href={link.href} aria-label={link.ariaLabel}>
+                <Fragment set:html={link.icon} />
+            </a>
+        </li>)}
+    </ul>
+</nav>
+</footer>
+
+<style>
+    footer {
+        padding-block: 2rem;
+        padding-inline: max(
+             var(--padding-inline),
+             50% - (var(--container) / 2)
+           );
+        background: hsl(var(--very-dark-blue));
+        color: hsl(var(--white));
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        @media (width <= 768px) {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+
+    nav > a {
+        flex: 0 0 fit-content;
+        min-inline-size: 7.5rem;
+        margin-inline-end: 1em;
+
+        @media (width > 768px) {
+            min-inline-size: 9rem;
+        }
+    }
+
+
+    ul {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+
+        @media (width > 768px) {
+            &:last-child {
+                margin-inline-start: auto;
+            }
+        }
+
+       @media (width <= 768px) {
+           &:first-of-type {
+               flex-direction: column;
+           }
+       }
+    }
+
+    a {
+        transition: var(--tr);
+        display: block;
+    }
+
+    a:is(:hover,:focus-visible) {
+        color: hsl(var(--soft-red));
+    }
+
+
+    ul:first-of-type a {
+        padding-inline: 1.5em;
+        padding-block: 1em;
+        text-transform: uppercase;
+        font-size: .75rem;
+        letter-spacing: 0.15em;
+    }
+
+    ul:last-of-type a {
+        aspect-ratio: 1;
+        inline-size: 3rem;
+        block-size: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

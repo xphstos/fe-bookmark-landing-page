@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+import ButtonSubmit from "./ButtonSubmit.astro";
+import ErrorIcon from "@assets/icon-error.svg"
+
+---
+
+<section>
+<header>
+<p>35,000+ already joined</p>
+<h2>Stay up-to-date with what we’re doing</h2>
+</header>
+
+<form action="">
+  <label aria-label="Email">
+  <input name="email" type="email" placeholder="example@email.com">
+  <Image src={ErrorIcon} alt="" role="presentation" />
+  <p>Whoops, make sure it's an email</p>
+  </label>
+  <ButtonSubmit>
+    Contact Us
+  </ButtonSubmit>
+</form>
+</section>
+
+
+<style>
+
+section {
+  --container: 28rem;
+  background: hsl(var(--soft-blue));
+  color: hsl(var(--white));
+  text-align: center;
+  padding-inline: max(
+       var(--padding-inline),
+       50% - (var(--container) / 2)
+     );
+  padding-block: 4rem;
+}
+
+header {
+  margin-block-end: 2rem;
+}
+
+header > p {
+  font-size: .8125rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  margin-block-end: 2rem;
+}
+
+h2 {
+  text-wrap: balance;
+  font-size: 1.25rem;
+  line-height: 1.333;
+
+  @media (width > 768px) {
+    font-size: 2rem;
+  }
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+
+  &:has( input:user-invalid) {
+    gap: calc(1rem + 1.75rem);
+  }
+
+  @media (width > 768px) {
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+input {
+  border: none;
+  padding: .5em 1rem;
+  block-size: 100%;
+  border-radius: .25em;
+  font-weight: 400;
+  min-inline-size: 1px;
+  min-block-size: 2.625rem;
+  inline-size: 100%;
+
+  &:is(:focus,:focus-visible) {
+    outline: transparent;
+  }
+
+  @media (width > 768px) {
+    min-block-size: auto;
+  }
+}
+
+label {
+  position: relative;
+  padding: .15em;
+  border-radius: .35em;
+  background-color: hsl(var(--white));
+  isolation: isolate;
+
+  &:has(> input:user-invalid) {
+    border-radius: .35em .35rem 0 0;
+    background-color: hsl(var(--soft-red));
+
+    img {
+      opacity: 1;
+    }
+
+    p {
+      opacity: 1;
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    translate: -1rem -50%;
+    opacity: 0;
+    transition: var(--tr);
+  }
+
+  p {
+    transition: var(--tr);
+    inline-size: 100%;
+    position: absolute;
+    inset: auto 0 0 0;
+    translate: 0 calc(100% - 0.15em);
+    z-index: -1;
+    opacity: 0;
+    font-size: .75rem;
+    font-weight: 500;
+    text-align: left;
+    padding: .35em 1em;
+    font-style: italic;
+    background-color: hsl(var(--soft-red));
+    color: hsl(var(--white));
+    border-end-end-radius: .35em;
+    border-end-start-radius: .35em;
+  }
+}
+
+
+
+
+</style>

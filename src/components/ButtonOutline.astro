@@ -1,0 +1,32 @@
+---
+---
+
+<button type="button">
+<slot />
+</button>
+
+<style>
+button {
+    background: hsl(var(--white));
+    color: hsl(var(--soft-blue));
+    border: none;
+    padding: 1em 1.667em;
+    border-radius: .35em;
+    border: .15em solid hsl(var(--soft-blue));
+    font-weight: 500;
+    font-size: .75rem;
+    cursor: pointer;
+    transition: var(--tr);
+    box-shadow: 0 .25em .5em -.25em hsl(var(--soft-blue));
+
+    &:is(:hover,:focus-visible) {
+        background: hsl(var(--soft-blue));
+        color: hsl(var(--white));
+    }
+
+    @media (width >= 768px) {
+        padding: .75em 1.25em;
+        font-size: 1em;
+    }
+}
+</style>

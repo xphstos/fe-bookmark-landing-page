@@ -1,0 +1,214 @@
+---
+import { headerLinks } from "@data/index";
+import { Image } from "astro:assets";
+import LogoBookmark from "@assets/logo-bookmark.svg"
+import LogoBookmarkWhite from "@assets/logo-bookmark-white.svg"
+import ButtonLogin from "@components/ButtonLogin.astro";
+import BurgerIcon from "@assets/icon-hamburger.svg?raw"
+import CloseIcon from "@assets/icon-close.svg?raw"
+---
+
+
+<header>
+  <nav>
+    <a href="/" title="Bookmark logo, link to homepage">
+      <Image src={LogoBookmark} alt="" role="presentation" />
+      <Image src={LogoBookmarkWhite} alt="" role="presentation" />
+    </a>
+    <label>
+      <input type="checkbox" name="mobile-menu">
+      <Fragment set:html={BurgerIcon} />
+      <Fragment set:html={CloseIcon} />
+    </label>
+    <ul role="list">
+    {headerLinks.map(link => {
+      if (link.label === 'Login') {
+        return <li><ButtonLogin>{link.label}</ButtonLogin></li>
+      }
+
+      return <li>
+        <a href={link.href}>{link.label}</a>
+      </li>
+    })}
+    </ul>
+  </nav>
+</header>
+
+
+<style>
+
+  header {
+    padding-inline: max(
+         var(--padding-inline),
+         50% - (var(--container) / 2)
+       );
+    padding-block: 2rem;
+    position: sticky;
+    top: 0;
+    background-color: hsl(var(--white));
+    z-index: 100;
+
+    @media (width > 768px) {
+      padding-block: 3rem 2rem;
+    }
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    isolation: isolate;
+
+    @media (width > 768px) {
+      justify-content: flex-start;
+    }
+
+    > label {
+      aspect-ratio: 1;
+      inline-size: 2.5rem;
+      block-size: auto;
+      display: grid;
+      place-content: center;
+      place-items: center;
+      cursor: pointer;
+      z-index: 5;
+
+      @media (width > 768px) {
+        display: none;
+      }
+
+      > input {
+        display: none;
+      }
+
+      > svg {
+        grid-area: 1 / -1;
+
+        &:nth-of-type(2) {
+          display: none;
+        }
+      }
+    }
+
+    > a {
+      flex: 0 0 fit-content;
+      max-inline-size: 9rem;
+      z-index: 5;
+
+      img:nth-child(2) {
+        display: none;
+      }
+    }
+
+    &:has(input:checked) {
+      > a {
+        img:nth-child(1) {
+          display: none;
+        }
+
+        img:nth-child(2) {
+          display: inline;
+        }
+      }
+
+      > label {
+          color: hsl(var(--white));
+
+        svg:nth-of-type(1) {
+          display: none;
+        }
+
+        svg:nth-of-type(2) {
+          display: inline;
+        }
+      }
+
+      > ul {
+        height: auto;
+        opacity: 1;
+      }
+    }
+  }
+
+  ul {
+      display: grid;
+      align-content: start;
+      background: hsl(var(--very-dark-blue) / .95);
+      color: hsl(var(--white));
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      margin: 0;
+      padding: 6rem 1.5rem;
+      height: 0;
+      opacity: 0;
+      transition: var(--tr);
+
+      @media (width > 768px) {
+        position: static;
+        display: flex;
+        color: hsl(var(--very-dark-blue));
+        align-items: center;
+        padding: 0;
+        height: auto;
+        opacity: 1;
+        margin-inline-start: auto;
+        background: hsl(var(--very-dark-blue) / 0);
+      }
+
+      li {
+         box-shadow: 0 1px 0 0 hsl(var(--grayish-blue));
+
+        &:first-child {
+           box-shadow: 0 1px 0 0 hsl(var(--grayish-blue)), 0 -1px 0 0 hsl(var(--grayish-blue));
+        }
+
+        &:last-child {
+          box-shadow: none;
+        }
+
+       &:not(:last-child) {
+         a {
+           &:hover {
+             color: hsl(var(--soft-red));
+           }
+         }
+       }
+
+        @media (width > 768px) {
+          box-shadow: none;
+
+          &:first-child {
+             box-shadow: none;
+          }
+
+          &:last-child {
+            margin-inline-start: 1.5rem;
+          }
+
+        }
+      }
+
+     a {
+       letter-spacing: 0.1em;
+       text-transform: uppercase;
+       padding-inline: 1.5rem;
+       padding-block: 1rem;
+       font-size: 1.25rem;
+       text-align: center;
+       display: block;
+      transition: var(--tr);
+
+
+       @media (width > 768px) {
+         font-size: .8125rem;
+
+         &:hover {
+           color: hsl(var(--soft-red));
+         }
+       }
+     }
+  }
+
+</style>

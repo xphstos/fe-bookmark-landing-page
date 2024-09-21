@@ -1,0 +1,58 @@
+---
+interface Props {
+  container?: string;
+  title?: string;
+  description?: string;
+}
+
+const {container = "1120px", title, description} = Astro.props;
+---
+
+<section style=`--container: ${container}`>
+    <header>
+        {title && <h2>{title}</h2>}
+        {description && <p>{description}</p>}
+    </header>
+    <slot />
+</section>
+
+
+<style>
+section {
+    padding-inline: max(
+         var(--padding-inline),
+         50% - (var(--container) / 2)
+       );
+    color: hsl(var(--very-dark-blue));
+    padding-block: 4rem;
+
+    @media (width > 768px) {
+        padding-block: 8rem;
+    }
+}
+
+header {
+    padding-inline: max(
+         0rem,
+         50% - (34rem / 2)
+       );
+    color: hsl(var(--very-dark-blue));
+    text-align: center;
+    margin-block-end: 2em;
+}
+
+h2 {
+    font-size: 1.25rem;
+    flex-wrap: 500;
+    margin-block-end: .5em;
+
+    @media (width > 768px) {
+        font-size: 2rem;
+    }
+}
+
+header > p {
+    text-wrap: balance;
+    color: hsl(var(--grayish-blue));
+}
+</style>

@@ -1,0 +1,123 @@
+---
+import Section from "./Section.astro";
+import Feature from "@components/Feature.astro"
+import Feature1 from "@assets/illustration-features-tab-1.svg"
+import Feature2 from "@assets/illustration-features-tab-2.svg"
+import Feature3 from "@assets/illustration-features-tab-3.svg"
+const tabs = [{
+  id: "bookmarking",
+  label: "Simple Bookmarking",
+  title: "Bookmark in one click",
+  description: "Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favourite sites.",
+  illustration: Feature1
+},
+{
+  id: "searching",
+  label: "Speedy Searching",
+  title: "Intelligent search",
+  description: "Our powerful search feature will help you find saved sites in no time at all. No need to trawl through all of your bookmarks.",
+  illustration: Feature2
+},
+{
+  id: "sharing",
+  label: "Easy Sharing",
+  title: "Share your bookmarks",
+  description: "Easily share your bookmarks and collections with others. Create a shareable link that you can send at the click of a button.",
+  illustration: Feature3
+}]
+
+---
+
+
+<Section title="Features" description="Our aim is to make it quick and easy for you to access your favourite websites. Your bookmarks sync between your devices so you can access them on the go.">
+  <section>
+  <nav>
+    {tabs.map((tabButton, i) => <label>
+          <input type="radio" name="features" id={tabButton.id} checked={i === 0}>
+          <span>{tabButton.label}</span>
+        </label>
+      )}
+    </nav>
+    {tabs.map((tabContent) => <div id={tabContent.id}>
+      <Feature {...tabContent} />
+    </div>
+    )}
+  </section>
+</Section>
+
+<style>
+  section {
+    display: grid;
+    grid-template-areas: "tabs-nav" "tabs-content";
+    max-inline-size: 35rem;
+    margin-inline: auto;
+
+    @media (width > 768px) {
+      max-inline-size: unset;
+    }
+  }
+
+  section:has(input[id="bookmarking"]:checked) div[id="bookmarking"] {
+    block-size: auto;
+    opacity: 1;
+  }
+  section:has(input[id="searching"]:checked) div[id="searching"] {
+    block-size: auto;
+    opacity: 1;
+  }
+  section:has(input[id="sharing"]:checked) div[id="sharing"] {
+    block-size: auto;
+    opacity: 1;
+  }
+
+  div[id] {
+    grid-area: tabs-content;
+    block-size: 0;
+    opacity: 0;
+  }
+
+  nav {
+    display: flex;
+    items: center;
+    justify-content: center;
+    grid-area: tabs-nav;
+
+    @media (width < 768px) {
+      flex-direction: column;
+    }
+  }
+
+  label {
+    text-align: center;
+    font-weight: 500;
+    padding: 1rem 2.5rem;
+    color: hsl(var(--very-dark-blue) / .5);
+    border-block-end: .1em solid hsl(var(--grayish-blue) / .2);
+    transition: var(--tr);
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      block-size: .2em;
+      background-color: hsl(var(--soft-red));
+      opacity: 0;
+      transition: var(--tr);
+    }
+
+
+    &:has(> input:checked) {
+      color: hsl(var(--very-dark-blue));
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+</style>

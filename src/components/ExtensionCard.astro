@@ -1,0 +1,78 @@
+---
+import { Image, type LocalImageProps } from 'astro:assets';
+
+interface Props {
+    img: LocalImageProps['src'];
+    title: string;
+    description: string;
+}
+
+const {img, title, description} = Astro.props;
+---
+
+<article>
+    <header>
+    <Image src={img} alt="" role="presentation"/>
+    <h3>
+    {title}
+    </h3>
+    <p>{description}</p>
+    </header>
+    <hr />
+    <footer>
+        <slot />
+    </footer>
+</article>
+
+
+<style>
+article {
+    background: white;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    border-radius: 1em;
+    box-shadow: 0 .5em 1.5em -.5em hsl(var(--soft-blue) / .2);
+}
+
+header {
+    display: grid;
+    place-content: end center;
+    place-items: center;
+    padding: 1.5em;
+}
+
+img {
+    inline-size: 6.25rem;
+    block-size: auto;
+    margin-block-end: 1.5em;
+}
+
+h3 {
+   font-size: 1.125em;
+   font-weight: 500;
+}
+
+p {
+    color: hsl(var(--grayish-blue));
+    font-size: .875em;
+}
+
+hr {
+    block-size: .75em;
+    background:
+       radial-gradient(hsl(var(--grayish-blue)) 15%, transparent 15%) repeat-x left top / .75em .75em;
+    inline-size: 100%;
+    opacity: .5;
+    border: none;
+    margin: 0;
+}
+
+footer {
+    padding: 1.5em;
+    font-size: .875rem;
+
+    > button {
+        inline-size: 100%;
+    }
+}
+</style>
