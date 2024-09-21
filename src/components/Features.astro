@@ -33,7 +33,7 @@ const tabs = [{
   <section>
   <nav>
     {tabs.map((tabButton, i) => <label>
-          <input type="radio" name="features" id={tabButton.id} checked={i === 0}>
+          <input type="radio" name="features" value={tabButton.id} checked={i === 0}>
           <span>{tabButton.label}</span>
         </label>
       )}
@@ -57,15 +57,15 @@ const tabs = [{
     }
   }
 
-  section:has(input[id="bookmarking"]:checked) div[id="bookmarking"] {
+  section:has(input[value="bookmarking"]:checked) div[id="bookmarking"] {
     block-size: auto;
     opacity: 1;
   }
-  section:has(input[id="searching"]:checked) div[id="searching"] {
+  section:has(input[value="searching"]:checked) div[id="searching"] {
     block-size: auto;
     opacity: 1;
   }
-  section:has(input[id="sharing"]:checked) div[id="sharing"] {
+  section:has(input[value="sharing"]:checked) div[id="sharing"] {
     block-size: auto;
     opacity: 1;
   }
